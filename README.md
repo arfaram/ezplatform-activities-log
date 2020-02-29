@@ -1,6 +1,7 @@
 # ezplatform Activities Log Bundle
 
-This bundle allows you to log user and system events from the UI or using API. See screenshots
+This bundle allows you to log user and system events from the UI or using API. See screenshots.
+
 It is a lightweight implementation compared to [EdgarEzUIAuditBundle](https://github.com/noodle69/EdgarEzUIAuditBundle) which provide more details.
 
 ## Requirement
