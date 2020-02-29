@@ -1,0 +1,6 @@
+role.policy.ezplatformactivitieslog: 'Activities'
+role.policy.ezplatformactivitieslog.all_functions: 'Activities / All functions'
+role.policy.ezplatformactivitieslog.activitieslog_manage: 'Activities / View'
+role.policy.ezplatformactivitieslog.activitieslog_all: 'Activities / All'
+role.policy.ezplatformactivitieslog.activitieslog_my: 'Activities / My'
+role.policy.content.activitieslog: 'Content / Activities'

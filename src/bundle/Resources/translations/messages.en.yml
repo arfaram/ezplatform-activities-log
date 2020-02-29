@@ -1,0 +1,24 @@
+activities:
+    log:
+        # Desc: Activities Log
+        cockpit: 'Activities Log'
+
+        content:
+            # Desc: Content ID
+            id: 'Content ID'
+
+        event:
+            # Desc: Event Data
+            data: 'Event Data'
+
+            # Desc: Date
+            date: Date
+
+            # Desc: Event Name
+            name: 'Event Name'
+
+        # Desc: User
+        user: User
+
+        # Desc: Not Found
+        user.not.found: 'Not Found'

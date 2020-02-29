@@ -1,0 +1,25 @@
+{% trans_default_domain 'activities' %}
+{% import _self as tab %}
+
+{% if pagination.currentPageResults is not empty %}
+    {{  include('EzPlatformActivitiesLogBundle:activities:activitieslog_table.html.twig', {
+        'pagination': pagination,
+    }) }}
+{% else %}
+    <p class="ez-table-no-content">
+        {{ 'tab.activities.no_logs'|trans|desc('There are no logs found.') }}
+    </p>
+{% endif %}
+
+{% if pagination.haveToPaginate %}
+    {{  include('@ezdesign/content/tab/pagination.html.twig', {
+        'pager': pagination,
+        'paginatonParams': {
+            'routeName': activities_pagination_params.route_name,
+            'routeParams': activities_pagination_params.route_params|merge({
+                '_fragment': constant('EzPlatform\\ActivitiesLog\\Tab\\LocationView\\ActivitiesLogTab::URI_FRAGMENT'),
+            }),
+            'pageParameter': '[page][activities]'
+        }
+    }) }}
+{% endif %}

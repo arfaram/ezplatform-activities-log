@@ -1,0 +1,67 @@
+<div class="ez-table-header mt-3">
+    <div class="ez-table-header__headline">
+        {{ 'Activities.log.cockpit'|trans|desc('Activities Log') }}
+        ({{ pagination.count }})
+    </div>
+</div>
+
+<div class="ez-scrollable-table-wrapper">
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="ez-table__header-cell">{{ 'activities.log.content.id'|trans|desc('Content ID') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.user'|trans|desc('User') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.event.name'|trans|desc('Event Name') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.event.data'|trans|desc('Event Data') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.event.date'|trans|desc('Date') }}</th>
+        </tr>
+        </thead>
+        <tbody class="table_row">
+        {% for log in pagination.currentPageResults %}
+            <tr>
+                <td class="ez-table__cell">
+                    {% if log.contentObjectId is not null %}
+                        {% set content = get_content(log.contentObjectId) %}
+                        {% if content is not null %}
+                            <a href="{{ path( "ez_urlalias", {"contentId": log.contentObjectId} ) }}">{{ ez_content_name(content) }}</a>
+                        {% else %}
+                            {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.contentObjectId }}
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">
+                    {% set user = get_content(log.userId) %}
+                    {% if user is not null %}
+                        {{ ez_content_name(user) }}
+                    {% else %}
+                        {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.userId }}
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">{{ log.eventName }}</td>
+                <td class="ez-table__cell">
+                    {% set signalDataEntries = data_unserialize(log.data) %}
+                    {% for key, signalDataValue in signalDataEntries[1:] %}
+                        {% if  key == 'trashItemDeleteResultList' %}
+                        {% else %}
+                            <li>
+                                {{ key }}:
+                                {% set value = check_value_type(signalDataValue) %}
+                                {% if value == 'array' %}
+                                    <ul>
+                                        {% for key, value in signalDataValue %}
+                                            <li>{{ key }}: {{ value }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    {{ value }}
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ log.date|ez_short_datetime }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

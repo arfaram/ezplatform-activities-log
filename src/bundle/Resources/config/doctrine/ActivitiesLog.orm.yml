@@ -1,0 +1,28 @@
+EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog:
+    type: entity
+    table: activities_log
+    repositoryClass: EzPlatform\ActivitiesLog\Repository\Storage\Doctrine\ActivitiesLogRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        contentObjectId:
+            type: integer
+            column: contentobject_id
+            nullable: true
+        userId:
+            type: integer
+            column: user_id
+        eventName:
+            type: string
+            length: 255
+            column: event_name
+        data:
+            type: text
+        date:
+            type: datetime
+            nullable: false
+    lifecycleCallbacks: {  }

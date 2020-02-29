@@ -1,0 +1,27 @@
+{
+    "name": "arfaram/ezplatform-activities-log",
+    "type": "ezplatform-bundle",
+    "description": "log several activities from UI or using the API",
+    "keywords": [
+        "ezplatform"
+    ],
+    "homepage": "https://github.com/arfaram/ezplatform-activities-log",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Ramzi Arfaoui",
+            "email": "ramzi_arfa@hotmail.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EzPlatform\\ActivitiesLogBundle\\": "src/ezplatform-activities-log/src/bundle",
+            "EzPlatform\\ActivitiesLog\\": "src/ezplatform-activities-log/src/lib"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ezsystems/ezpublish-kernel": "^7.5",
+        "doctrine/orm": "^2.6"
+    }
+}

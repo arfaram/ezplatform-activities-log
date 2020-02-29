@@ -1,0 +1,15 @@
+activities:
+    log:
+        # Desc: You are not allowed to manage activities.
+        access_denied: 'You are not allowed to manage activities. '
+
+        # Desc: Activities Log
+        cockpit: 'Activities Log'
+
+tab:
+    activities:
+        # Desc: There are no logs found.
+        no_logs: 'There are no logs found.'
+
+    name:
+        activitieslog: 'Activities'
