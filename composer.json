@@ -15,8 +15,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "EzPlatform\\ActivitiesLogBundle\\": "src/ezplatform-activities-log/src/bundle",
-            "EzPlatform\\ActivitiesLog\\": "src/ezplatform-activities-log/src/lib"
+            "EzPlatform\\ActivitiesLogBundle\\": "src/bundle/",
+            "EzPlatform\\ActivitiesLog\\": "src/lib/"
         }
     },
     "require": {
