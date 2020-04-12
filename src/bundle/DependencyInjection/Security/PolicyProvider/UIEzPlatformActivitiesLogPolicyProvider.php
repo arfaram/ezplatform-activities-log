@@ -23,6 +23,6 @@ class UIEzPlatformActivitiesLogPolicyProvider extends YamlPolicyProvider
      */
     public function getFiles()
     {
-        return [$this->path . '/Resources/config/policies.yml'];
+        return [$this->path . '/Resources/config/policies.yaml'];
     }
 }

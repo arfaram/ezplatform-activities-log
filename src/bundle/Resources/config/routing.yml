@@ -1,8 +1,0 @@
-admin_log_cockpit_all:
-    path: /activitieslog/cockpit/all
-    defaults:
-        _controller: 'EzPlatformActivitiesLogBundle:ActivitiesLog:cockpitAll'
-admin_log_cockpit_my:
-    path: /ActivitiesLog/cockpit/my
-    defaults:
-        _controller: 'EzPlatformActivitiesLogBundle:ActivitiesLog:cockpitMy'

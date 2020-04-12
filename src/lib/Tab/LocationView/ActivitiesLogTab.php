@@ -3,6 +3,7 @@
 namespace EzPlatform\ActivitiesLog\Tab\LocationView;
 
 use eZ\Publish\API\Repository\PermissionResolver;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
@@ -10,7 +11,7 @@ use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
 use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
@@ -20,8 +21,8 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var string $userContentTypeIdentifier */
-    private $userContentTypeIdentifier;
+    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    private $configResolver;
 
     /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService */
     private $activitiesLogRepositoryService;
@@ -32,12 +33,11 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
     /**
      * ActivitiesLogTab constructor.
      * @param \Twig\Environment $twig
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService $activitiesLogRepositoryService
-     * @param $userContentTypeIdentifier
      */
     public function __construct(
         Environment $twig,
@@ -46,13 +46,13 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
         PermissionResolver $permissionResolver,
         RequestStack $requestStack,
         ActivitiesLogRepositoryService $activitiesLogRepositoryService,
-        $userContentTypeIdentifier
+        ConfigResolverInterface $configResolver
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
         $this->permissionResolver = $permissionResolver;
         $this->requestStack = $requestStack;
         $this->activitiesLogRepositoryService = $activitiesLogRepositoryService;
-        $this->userContentTypeIdentifier = $userContentTypeIdentifier;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -94,7 +94,7 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
         $contentType = $parameters['contentType'];
 
         //Note: this menu item will be ONLY displayed on user content object level
-        $isUser = new ContentTypeIsUser($this->userContentTypeIdentifier);
+        $isUser = new ContentTypeIsUser($this->configResolver->getParameter('user_content_type_identifier'));
 
         return $isUser->isSatisfiedBy($contentType);
     }

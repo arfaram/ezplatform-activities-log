@@ -10,10 +10,7 @@ services:
 #    EzPlatform\ActivitiesLogBundle\Controller\:
 #        resource: '../../Controller'
 
-    #UI menu item
-    EzPlatform\ActivitiesLog\EventListener\ConfigureMenuListener:
-        tags:
-            - { name: kernel.event_listener, event: ezplatform_admin_ui.menu_configure.main_menu, method: onMenuConfigure }
+    EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog: ~
 
     #UI Interface
     EzPlatform\ActivitiesLogBundle\Controller\ActivitiesLogController:
@@ -21,26 +18,17 @@ services:
             $activitiesLogUiPanelPaginationLimit: '%activitiesLog.ui_panel.pagination_limit%'
             $user: '@EzPlatform\ActivitiesLog\Repository\User'
 
-    #trigger UI events
-    EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLogSignalListener: ~
-
     #helper to get more information about the event for the UI Interface
     EzPlatform\ActivitiesLogBundle\Twig\ActivitiesLogExtension:
         tags:
             - { name: twig.extension }
 
+    EzPlatform\ActivitiesLog\Repository\Storage\Doctrine\ActivitiesLogRepository: ~
     #Pagination and queryBuilder results for UI Interface
     EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService: ~
 
     #Tab helper to get current logged in user
     EzPlatform\ActivitiesLog\Repository\User: ~
-
-    #Activities tab only for users
-    EzPlatform\ActivitiesLog\Tab\LocationView\ActivitiesLogTab:
-        arguments:
-            $userContentTypeIdentifier: '$user_content_type_identifier$'
-        tags:
-            - { name: ezplatform.tab, group: location-view }
 
     #Add view parameters
     EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLogTabSubscriber:

@@ -2,7 +2,7 @@
 {% import _self as tab %}
 
 {% if pagination.currentPageResults is not empty %}
-    {{  include('EzPlatformActivitiesLogBundle:activities:activitieslog_table.html.twig', {
+    {{  include('@ezdesign/activities/activitieslog_table.html.twig', {
         'pagination': pagination,
     }) }}
 {% else %}
@@ -14,7 +14,7 @@
 {% if pagination.haveToPaginate %}
     {{  include('@ezdesign/content/tab/pagination.html.twig', {
         'pager': pagination,
-        'paginatonParams': {
+        'paginaton_params': {
             'routeName': activities_pagination_params.route_name,
             'routeParams': activities_pagination_params.route_params|merge({
                 '_fragment': constant('EzPlatform\\ActivitiesLog\\Tab\\LocationView\\ActivitiesLogTab::URI_FRAGMENT'),

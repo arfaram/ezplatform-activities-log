@@ -1,4 +1,4 @@
-{% extends "@ezdesign/layout.html.twig" %}
+{% extends "@ezdesign/ui/layout.html.twig" %}
 
 {% trans_default_domain 'activities' %}
 
@@ -16,7 +16,7 @@
 
                     <div class="display-results">
 
-                        {% include 'EzPlatformActivitiesLogBundle:activities:activitieslog_table.html.twig' %}
+                        {% include '@ezdesign/activities/activitieslog_table.html.twig' %}
 
                     </div>
                     <div class="container">

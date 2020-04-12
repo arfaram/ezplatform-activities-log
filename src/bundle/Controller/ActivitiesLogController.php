@@ -6,10 +6,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use eZ\Publish\API\Repository\PermissionResolver;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService;
 use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EzSystems\EzPlatformAdminUiBundle\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 
-class ActivitiesLogController extends Controller
+class ActivitiesLogController extends BaseController
 {
     private const PAGINATION_PARAM_NAME = 'page';
 
@@ -65,7 +65,7 @@ class ActivitiesLogController extends Controller
     {
         if (!$this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_all')) {
             return $this->render(
-                'EzPlatformActivitiesLogBundle:activities:cockpit.html.twig',
+                '@ezdesign/activities/cockpit.html.twig',
                 [
                     'access_denied' => 'access_denied',
                 ]
@@ -75,7 +75,7 @@ class ActivitiesLogController extends Controller
         $pagerfanta = $this->activitiesLogRepositoryService->getPageResults($this->activitiesLogUiPanelPaginationLimit, $page);
 
         return $this->render(
-            'EzPlatformActivitiesLogBundle:activities:cockpit.html.twig',
+            '@ezdesign/activities/cockpit.html.twig',
             [
                 'pagination' => $pagerfanta,
             ]
@@ -91,7 +91,7 @@ class ActivitiesLogController extends Controller
     {
         if (!$this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_my')) {
             return $this->render(
-                'EzPlatformActivitiesLogBundle:activities:cockpit.html.twig',
+                '@ezdesign/activities/cockpit.html.twig',
                 [
                     'access_denied' => 'access_denied',
                 ]
@@ -109,7 +109,7 @@ class ActivitiesLogController extends Controller
         );
 
         return $this->render(
-            'EzPlatformActivitiesLogBundle:activities:cockpit.html.twig',
+            '@ezdesign/activities/cockpit.html.twig',
             [
                 'pagination' => $pagerfanta,
             ]

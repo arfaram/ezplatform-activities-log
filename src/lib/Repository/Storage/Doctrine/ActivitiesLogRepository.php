@@ -5,7 +5,7 @@ namespace EzPlatform\ActivitiesLog\Repository\Storage\Doctrine;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class ActivitiesLogRepository extends ServiceEntityRepository
 {
@@ -14,9 +14,9 @@ class ActivitiesLogRepository extends ServiceEntityRepository
 
     /**
      * ActivitiesLogRepository constructor.
-     * @param \Symfony\Bridge\Doctrine\RegistryInterface $registry
+     * @param \Doctrine\Persistence\ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ActivitiesLog::class);
     }

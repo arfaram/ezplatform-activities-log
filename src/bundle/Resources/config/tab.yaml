@@ -1,0 +1,6 @@
+services:
+    #Activities tab only for users
+    EzPlatform\ActivitiesLog\Tab\LocationView\ActivitiesLogTab:
+        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        tags:
+            - { name: ezplatform.tab, group: location-view }

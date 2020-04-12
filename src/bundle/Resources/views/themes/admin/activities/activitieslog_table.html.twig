@@ -22,7 +22,7 @@
                 <td class="ez-table__cell">
                     {% if log.contentObjectId is not null %}
                         {% set content = get_content(log.contentObjectId) %}
-                        {% if content is not null %}
+                        {% if content is not null and content.versionInfo.contentInfo.status == 1%}
                             <a href="{{ path( "ez_urlalias", {"contentId": log.contentObjectId} ) }}">{{ ez_content_name(content) }}</a>
                         {% else %}
                             {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.contentObjectId }}
@@ -40,23 +40,21 @@
                 <td class="ez-table__cell">{{ log.eventName }}</td>
                 <td class="ez-table__cell">
                     {% set signalDataEntries = data_unserialize(log.data) %}
-                    {% for key, signalDataValue in signalDataEntries[1:] %}
-                        {% if  key == 'trashItemDeleteResultList' %}
-                        {% else %}
-                            <li>
-                                {{ key }}:
-                                {% set value = check_value_type(signalDataValue) %}
-                                {% if value == 'array' %}
-                                    <ul>
-                                        {% for key, value in signalDataValue %}
-                                            <li>{{ key }}: {{ value }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% else %}
-                                    {{ value }}
-                                {% endif %}
-                            </li>
-                        {% endif %}
+                    {% for key, signalDataValue in signalDataEntries %}
+                        <li>
+                            {{ key }}:
+                            {% set value = check_value_type(signalDataValue) %}
+                            {% if value == 'array' %}
+                                <ul>
+                                    {% for key, value in signalDataValue %}
+                                        <li>{{ key }}: {{ value }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ value }}
+                            {% endif %}
+                        </li>
+
                     {% endfor %}
                 </td>
                 <td>{{ log.date|ez_short_datetime }}</td>

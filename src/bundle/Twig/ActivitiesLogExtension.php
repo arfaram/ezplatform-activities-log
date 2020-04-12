@@ -5,10 +5,10 @@ namespace EzPlatform\ActivitiesLogBundle\Twig;
 use eZ\Publish\API\Repository\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Repository as RepositoryInterface;
 use Psr\Log\LoggerInterface;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ActivitiesLogExtension extends Twig_Extension
+class ActivitiesLogExtension extends AbstractExtension
 {
     /** @var \eZ\Publish\API\Repository\Repository */
     private $repository;
@@ -38,15 +38,15 @@ class ActivitiesLogExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'data_unserialize',
                 array($this, 'dataUnserialize')
             ),
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'check_value_type',
                 array($this, 'checkValueType')
             ),
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'get_content',
                 array($this, 'getUserperID')
             ),
