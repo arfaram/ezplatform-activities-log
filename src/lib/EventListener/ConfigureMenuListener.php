@@ -9,9 +9,14 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 
 class ConfigureMenuListener implements TranslationContainerInterface
 {
-    const ACTIVITIES_LOG_COCKPIT_MENU_ITEM = 'activities__log__cockpit';
-    const ACTIVITIES_LOG_COCKPIT_MENU_ALL = 'activities__log__cockpit__all';
-    const ACTIVITIES_LOG_COCKPIT_MENU_MY = 'activities__log__cockpit__my';
+    /** @var string */
+    private const ACTIVITIES_LOG_MENU_ITEM = 'activities__log__menu__item';
+
+    /** @var string */
+    private const ACTIVITIES_LOG_MENU_ALL = 'activities__log__menu__all';
+
+    /** @var string */
+    private const ACTIVITIES_LOG_MENU_MY = 'activities__log__menu__my';
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
@@ -35,27 +40,27 @@ class ConfigureMenuListener implements TranslationContainerInterface
         $root = $event->getMenu();
         if ($this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_manage')) {
             $root->addChild(
-                self::ACTIVITIES_LOG_COCKPIT_MENU_ITEM,
+                self::ACTIVITIES_LOG_MENU_ITEM,
                 [
                     'extras' => ['translation_domain' => 'menu'],
                 ]
             );
         }
         if ($this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_all')) {
-            $root[self::ACTIVITIES_LOG_COCKPIT_MENU_ITEM]->addChild(
-                self::ACTIVITIES_LOG_COCKPIT_MENU_ALL,
+            $root[self::ACTIVITIES_LOG_MENU_ITEM]->addChild(
+                self::ACTIVITIES_LOG_MENU_ALL,
                 [
-                    'route' => 'admin_log_cockpit_all',
+                    'route' => 'admin_log_activities_all',
                     'extras' => ['translation_domain' => 'menu'],
                 ]
             );
         }
 
         if ($this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_my')) {
-            $root[self::ACTIVITIES_LOG_COCKPIT_MENU_ITEM]->addChild(
-                self::ACTIVITIES_LOG_COCKPIT_MENU_MY,
+            $root[self::ACTIVITIES_LOG_MENU_ITEM]->addChild(
+                self::ACTIVITIES_LOG_MENU_MY,
                 [
-                    'route' => 'admin_log_cockpit_my',
+                    'route' => 'admin_log_activities_my',
                     'extras' => ['translation_domain' => 'menu'],
                 ]
             );
@@ -66,9 +71,9 @@ class ConfigureMenuListener implements TranslationContainerInterface
     public static function getTranslationMessages()
     {
         return [
-            (new Message(self::ACTIVITIES_LOG_COCKPIT_MENU_ITEM, 'menu'))->setDesc('Activities Log'),
-            (new Message(self::ACTIVITIES_LOG_COCKPIT_MENU_ALL, 'menu'))->setDesc('All Logs'),
-            (new Message(self::ACTIVITIES_LOG_COCKPIT_MENU_MY, 'menu'))->setDesc('My Logs'),
+            (new Message(self::ACTIVITIES_LOG_MENU_ITEM, 'menu'))->setDesc('Activities Log'),
+            (new Message(self::ACTIVITIES_LOG_MENU_ALL, 'menu'))->setDesc('All Logs'),
+            (new Message(self::ACTIVITIES_LOG_MENU_MY, 'menu'))->setDesc('My Logs'),
         ];
     }
 }

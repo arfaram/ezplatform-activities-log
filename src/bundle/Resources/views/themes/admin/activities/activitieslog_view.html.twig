@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'activities' %}
 
-{% block title %}{{ 'activities.log.cockpit'|trans|desc('Activities Log Cockpit') }}{% endblock %}
+{% block title %}{{ 'activities.log.view'|trans|desc('Activities Log') }}{% endblock %}
 
 {% block content %}
     <div class="row align-items-stretch ez-main-row">
@@ -19,12 +19,14 @@
                         {% include '@ezdesign/activities/activitieslog_table.html.twig' %}
 
                     </div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            {{ pagerfanta(pagination, 'ez') }}
-                        </div>
-                    </div>
-
+                    {% if pagination.haveToPaginate %}
+                        {{  include('@ezdesign/content/tab/pagination.html.twig', {
+                            'pager': pagination,
+                            'paginaton_params': {
+                                'pageParameter': '[page]'
+                            }
+                        }) }}
+                    {% endif %}
                 {% endif %}
             </section>
         </div>

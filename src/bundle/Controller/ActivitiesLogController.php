@@ -4,6 +4,7 @@ namespace EzPlatform\ActivitiesLogBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eZ\Publish\API\Repository\PermissionResolver;
+use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService;
 use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
 use EzSystems\EzPlatformAdminUiBundle\Controller\Controller as BaseController;
@@ -25,6 +26,9 @@ class ActivitiesLogController extends BaseController
     /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService */
     private $activitiesLogRepositoryService;
 
+    /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService */
+    private $activitiesLogInteractiveLogin;
+
     /** @var int */
     private $activitiesLogUiPanelPaginationLimit;
 
@@ -37,6 +41,7 @@ class ActivitiesLogController extends BaseController
      * @param \EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog $activitiesLog
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService $activitiesLogRepositoryService
+     * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService $activitiesLogInteractiveLogin
      * @param int $activitiesLogUiPanelPaginationLimit
      * @param $user
      */
@@ -45,13 +50,15 @@ class ActivitiesLogController extends BaseController
         ActivitiesLog $activitiesLog,
         PermissionResolver $permissionResolver,
         ActivitiesLogRepositoryService $activitiesLogRepositoryService,
-        int $activitiesLogUiPanelPaginationLimit,
+        ActivitiesLogInteractiveLoginService $activitiesLogInteractiveLogin,
+        $activitiesLogUiPanelPaginationLimit,
         $user
     ) {
         $this->entityManager = $entityManager;
         $this->activitiesLog = $activitiesLog;
         $this->permissionResolver = $permissionResolver;
         $this->activitiesLogRepositoryService = $activitiesLogRepositoryService;
+        $this->activitiesLogInteractiveLogin = $activitiesLogInteractiveLogin;
         $this->activitiesLogUiPanelPaginationLimit = $activitiesLogUiPanelPaginationLimit;
         $this->user = $user;
     }
@@ -61,11 +68,11 @@ class ActivitiesLogController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function cockpitAllAction(Request $request)
+    public function allActivitiesAction(Request $request)
     {
         if (!$this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_all')) {
             return $this->render(
-                '@ezdesign/activities/cockpit.html.twig',
+                '@ezdesign/activities/activitieslog_view.html.twig',
                 [
                     'access_denied' => 'access_denied',
                 ]
@@ -75,7 +82,7 @@ class ActivitiesLogController extends BaseController
         $pagerfanta = $this->activitiesLogRepositoryService->getPageResults($this->activitiesLogUiPanelPaginationLimit, $page);
 
         return $this->render(
-            '@ezdesign/activities/cockpit.html.twig',
+            '@ezdesign/activities/activitieslog_view.html.twig',
             [
                 'pagination' => $pagerfanta,
             ]
@@ -87,11 +94,11 @@ class ActivitiesLogController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function cockpitMyAction(Request $request)
+    public function myActivitiesAction(Request $request)
     {
         if (!$this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_my')) {
             return $this->render(
-                '@ezdesign/activities/cockpit.html.twig',
+                '@ezdesign/activities/activitieslog_view.html.twig',
                 [
                     'access_denied' => 'access_denied',
                 ]
@@ -109,9 +116,10 @@ class ActivitiesLogController extends BaseController
         );
 
         return $this->render(
-            '@ezdesign/activities/cockpit.html.twig',
+            '@ezdesign/activities/activitieslog_view.html.twig',
             [
                 'pagination' => $pagerfanta,
+                'userInteractiveLoginData' => $this->activitiesLogInteractiveLogin->getInteractiveLoginData($userId),
             ]
         );
     }

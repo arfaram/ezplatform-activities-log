@@ -12,8 +12,7 @@ use eZ\Publish\API\Repository\Events\Content\RevealContentEvent;
 use eZ\Publish\API\Repository\Events\Content\UpdateContentEvent;
 
 /**
- * Class ContentEventsSubscriber
- * @package EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLog
+ * Class ContentEventsSubscriber.
  */
 final class ContentEventsSubscriber extends AbstractSubscriber
 {
@@ -106,7 +105,6 @@ final class ContentEventsSubscriber extends AbstractSubscriber
 
         $this->setDefaultData($event)->persistData();
     }
-
 
     /**
      * @todo Bug: delete multiple version trigger only the last deleted one

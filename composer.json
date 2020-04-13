@@ -21,7 +21,7 @@
     },
     "require": {
         "php": "^7.1",
-        "ezsystems/ezpublish-kernel": "^7.5",
+        "ezsystems/ezpublish-kernel": "^1.0",
         "doctrine/orm": "^2.6"
     }
 }

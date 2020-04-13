@@ -10,10 +10,11 @@ class ActivitiesLogRepositoryService
 {
     use ActivitiesLogPagination;
 
-    /** @var \EzPlatform\ActivitiesLog\Repository\Storage\Doctrine\ActivitiesLogRepository */
+    /** @var \EzPlatform\ActivitiesLog\Repository\Storage\Doctrine\ActivitiesLogRepository $activitiesLogRepository */
     private $activitiesLogRepository;
 
-    public $query;
+    /** @var \Doctrine\ORM\QueryBuilder\QueryBuilder $queryBuilder */
+    public $queryBuilder;
 
     /**
      * ActivitiesLogRepositoryService constructor.
@@ -29,11 +30,11 @@ class ActivitiesLogRepositoryService
      * @param int $offset
      * @return \Pagerfanta\Pagerfanta
      */
-    public function getPageResults($limit = 20, $offset = 0): Pagerfanta
+    public function getPageResults( $limit , $offset): Pagerfanta
     {
-        $this->query = $this->activitiesLogRepository->getQuery('queryBuilder');
+        $this->queryBuilder = $this->activitiesLogRepository->getQueryBuilder('queryBuilder');
 
-        return $this->paginate($this->query, $limit, $offset);
+        return $this->paginate($this->queryBuilder, is_null($limit) ? 20: $limit, is_null($offset) ? 0: $offset);
     }
 
     /**
@@ -42,10 +43,26 @@ class ActivitiesLogRepositoryService
      * @param int $offset
      * @return \Pagerfanta\Pagerfanta
      */
-    public function getPageResultsPerUser($userId, $limit = 20, $offset = 0): Pagerfanta
+    public function getPageResultsPerUser($userId, $limit , $offset ): Pagerfanta
     {
-        $this->query = $this->activitiesLogRepository->getQuery('queryBuilderPerUserId', ['userId' => $userId]);
+        $this->queryBuilder = $this->activitiesLogRepository->getQueryBuilder('queryBuilderPerUserId', ['userId' => $userId]);
 
-        return $this->paginate($this->query, $limit, $offset);
+        return $this->paginate($this->queryBuilder, is_null($limit) ? 20: $limit, is_null($offset) ? 0: $offset);
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
+     */
+    public function getUserInteractiveLogin($userId)
+    {
+        $this->queryBuilder = $this->activitiesLogRepository->getQueryBuilder(
+            'queryUserInteractiveLogin',
+                [
+                    'userId' => $userId,
+                    'eventName' => 'InteractiveLoginEvent',
+                ]);
+
+        return $this->queryBuilder->getQuery()->execute();
     }
 }

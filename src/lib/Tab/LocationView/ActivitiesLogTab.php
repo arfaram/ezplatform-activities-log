@@ -4,6 +4,7 @@ namespace EzPlatform\ActivitiesLog\Tab\LocationView;
 
 use eZ\Publish\API\Repository\PermissionResolver;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService;
 use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
 use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
@@ -16,7 +17,8 @@ use Twig\Environment;
 
 class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
-    const URI_FRAGMENT = 'ez-tab-location-view-activitiesLog';
+    /** @var string */
+    public const URI_FRAGMENT = 'ez-tab-location-view-activitiesLog';
 
     /** @var \eZ\Publish\API\Repository\PermissionResolver */
     private $permissionResolver;
@@ -30,6 +32,9 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     private $requestStack;
 
+    /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService */
+    private $activitiesLogInteractiveLogin;
+
     /**
      * ActivitiesLogTab constructor.
      * @param \Twig\Environment $twig
@@ -38,6 +43,8 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
      * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService $activitiesLogRepositoryService
+     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService $activitiesLogInteractiveLogin
      */
     public function __construct(
         Environment $twig,
@@ -46,13 +53,15 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
         PermissionResolver $permissionResolver,
         RequestStack $requestStack,
         ActivitiesLogRepositoryService $activitiesLogRepositoryService,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
+        ActivitiesLogInteractiveLoginService $activitiesLogInteractiveLogin
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
         $this->permissionResolver = $permissionResolver;
         $this->requestStack = $requestStack;
         $this->activitiesLogRepositoryService = $activitiesLogRepositoryService;
         $this->configResolver = $configResolver;
+        $this->activitiesLogInteractiveLogin = $activitiesLogInteractiveLogin;
     }
 
     /**
@@ -104,13 +113,13 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
      */
     public function getTemplate(): string
     {
-        return '@ezdesign/content/tab/activitieslog_tab.html.twig';
+        return '@ezdesign/content/tab/activitieslog_user_tab.html.twig';
     }
 
     /**
-     * get logs for the current user location.
      * @param array $contextParameters
      * @return array
+     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {
@@ -129,6 +138,7 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
         $viewParameters = [
             'pagination' => $pagerfanta,
             'activities_pagination_params' => $activitiesLogPaginationParams,
+            'userInteractiveLoginData' => $this->activitiesLogInteractiveLogin->getInteractiveLoginData($userId),
         ];
 
         return $viewParameters;

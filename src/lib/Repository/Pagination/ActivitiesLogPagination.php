@@ -5,6 +5,9 @@ namespace EzPlatform\ActivitiesLog\Repository\Pagination;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
+/**
+ * Trait ActivitiesLogPagination.
+ */
 trait ActivitiesLogPagination
 {
     /**

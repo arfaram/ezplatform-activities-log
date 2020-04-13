@@ -1,7 +1,7 @@
 activities:
     log:
         # Desc: Activities Log
-        cockpit: 'Activities Log'
+        view: 'Activities Log'
 
         content:
             # Desc: Content ID

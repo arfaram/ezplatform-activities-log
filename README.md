@@ -16,6 +16,7 @@ eZ Platform **3.x +**
 - Current logged in user activities
 - Activities on user level
 - Several policies to allow user the access to the activities panels
+- New in 2.1: user Login History, see CHANGELOG file for more details or see screeshots below
 
 
 ## Limitations
@@ -63,6 +64,30 @@ ez_platform_activities_log:
 ```
 php bin/console doctrine:schema:update --force
 ```
+
+Note: use `doc/mysql.sql` to create the DB `activities_log` table if you got some doctrine issues 
+
+## Override pagination values
+
+Add you pagination value to `.env` file:
+
+```
+# Activities menus(all, me)
+ACTIVITIESLOG_PAGINATION_LIMIT=XX
+
+#activity user tab menu in location view
+ACTIVITIESLOG_USER_TAB_PAGINATION_LIMIT=XX
+```
+
+or use parameters:
+
+```
+parameters:
+    env(ACTIVITIESLOG_PAGINATION_LIMIT): XX
+    env(ACTIVITIESLOG_USER_TAB_PAGINATION_LIMIT): XX
+```
+
+Defaut values are 15 for both.
 
 ## Screenshots
 

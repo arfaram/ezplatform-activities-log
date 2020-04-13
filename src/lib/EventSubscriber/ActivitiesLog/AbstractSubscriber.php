@@ -10,8 +10,7 @@ use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class AbstractSubscriber
- * @package EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLog
+ * Class AbstractSubscriber.
  */
 abstract class AbstractSubscriber implements EventSubscriberInterface
 {

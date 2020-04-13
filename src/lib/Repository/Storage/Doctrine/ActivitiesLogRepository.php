@@ -7,6 +7,9 @@ use Doctrine\ORM\QueryBuilder;
 use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * Class ActivitiesLogRepository.
+ */
 class ActivitiesLogRepository extends ServiceEntityRepository
 {
     /** @var QueryBuilder $queryBuilder */
@@ -49,11 +52,28 @@ class ActivitiesLogRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param array $params
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function queryUserInteractiveLogin(array $params): QueryBuilder
+    {
+        $this->queryBuilder = $this->createQueryBuilder('a')
+            ->select('a')
+            ->andWhere('a.userId = ?1')
+            ->andWhere('a.eventName = ?2')
+            ->setParameter(1, $params['userId'])
+            ->setParameter(2, $params['eventName'])
+            ->orderBy('a.date', 'DESC');
+
+        return $this->queryBuilder;
+    }
+
+    /**
      * @param $method
      * @param array|null $params
      * @return mixed
      */
-    public function getQuery($method, array $params = null)
+    public function getQueryBuilder($method, array $params = null)
     {
         return $this->{$method}($params);
     }

@@ -1,6 +1,8 @@
 parameters:
-    activitiesLog.ui_panel.pagination_limit: 5
-    activitiesLog.user_tab.pagination_limit: 5
+    activitiesLog.ui_panel.pagination_limit: '%env(int:ACTIVITIESLOG_PAGINATION_LIMIT)%'
+    env(ACTIVITIESLOG_PAGINATION_LIMIT): 15
+    activitiesLog.user_tab.pagination_limit: '%env(int:ACTIVITIESLOG_USER_TAB_PAGINATION_LIMIT)%'
+    env(ACTIVITIESLOG_USER_TAB_PAGINATION_LIMIT): 15
 services:
     _defaults:
         autowire: true
@@ -26,6 +28,10 @@ services:
     EzPlatform\ActivitiesLog\Repository\Storage\Doctrine\ActivitiesLogRepository: ~
     #Pagination and queryBuilder results for UI Interface
     EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService: ~
+
+    #Login & password  information
+    EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService:
+        lazy: true
 
     #Tab helper to get current logged in user
     EzPlatform\ActivitiesLog\Repository\User: ~

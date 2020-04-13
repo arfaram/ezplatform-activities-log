@@ -4,6 +4,9 @@ namespace EzPlatform\ActivitiesLog\Repository;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+/**
+ * Class User.
+ */
 class User
 {
     /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */

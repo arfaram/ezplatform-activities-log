@@ -1,3 +1,3 @@
-activities__log__cockpit: 'Activities'
-activities__log__cockpit__all: 'All Activities'
-activities__log__cockpit__my: 'My Activities'
+activities__log__menu__item: 'Activities'
+activities__log__menu__all: 'All Activities'
+activities__log__menu__my: 'My Activities'

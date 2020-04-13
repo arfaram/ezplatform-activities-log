@@ -1,6 +1,6 @@
-admin_log_cockpit_all:
-    path: /activitieslog/cockpit/all
-    controller: 'EzPlatform\ActivitiesLogBundle\Controller\ActivitiesLogController:cockpitAllAction'
-admin_log_cockpit_my:
-    path: /ActivitiesLog/cockpit/my
-    controller: 'EzPlatform\ActivitiesLogBundle\Controller\ActivitiesLogController:cockpitMyAction'
+admin_log_activities_all:
+    path: /activitieslog/all
+    controller: 'EzPlatform\ActivitiesLogBundle\Controller\ActivitiesLogController:allActivitiesAction'
+admin_log_activities_my:
+    path: /activitieslog/my
+    controller: 'EzPlatform\ActivitiesLogBundle\Controller\ActivitiesLogController:myActivitiesAction'
