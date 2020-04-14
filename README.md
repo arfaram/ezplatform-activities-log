@@ -91,11 +91,11 @@ Defaut values are 15 for both.
 
 ## Screenshots
 
-<img src="doc/all_activities.png" />
+<img src="doc/all_activities_.png" />
 
 
-<img src="doc/my_activities.png" />
+<img src="doc/my_activities_.png" />
 
 
-<img src="doc/user_activities.png" />
+<img src="doc/user_activities_.png" />
 
