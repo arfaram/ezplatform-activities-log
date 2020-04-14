@@ -1,7 +1,7 @@
 {
     "name": "arfaram/ezplatform-activities-log",
     "type": "ezplatform-bundle",
-    "description": "log several activities from UI or using the API",
+    "description": "UI Interface for several system activities and user history for eZ Platform 3+",
     "keywords": [
         "ezplatform"
     ],
