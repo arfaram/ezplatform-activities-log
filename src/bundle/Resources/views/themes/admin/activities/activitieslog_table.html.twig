@@ -11,7 +11,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th class="ez-table__header-cell">{{ 'activities.log.content.id'|trans|desc('Content ID') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.content'|trans|desc('Content') }}</th>
             <th class="ez-table__header-cell">{{ 'activities.log.user'|trans|desc('User') }}</th>
             <th class="ez-table__header-cell">{{ 'activities.log.event.name'|trans|desc('Event Name') }}</th>
             <th class="ez-table__header-cell">{{ 'activities.log.event.data'|trans|desc('Event Data') }}</th>
@@ -25,7 +25,7 @@
                     {% if log.contentObjectId is not null %}
                         {% set content = get_content(log.contentObjectId) %}
                         {% if content is not null and content.versionInfo.contentInfo.status == 1%}
-                            <a href="{{ path( "ez_urlalias", {"contentId": log.contentObjectId} ) }}">{{ ez_content_name(content) }}</a>
+                            <a href="{{ path( "_ez_content_view", {"contentId": log.contentObjectId} ) }}">{{ ez_content_name(content) }}</a>
                         {% else %}
                             {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.contentObjectId }}
                         {% endif %}
