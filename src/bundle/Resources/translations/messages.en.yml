@@ -3,9 +3,8 @@ activities:
         # Desc: Activities Log
         view: 'Activities Log'
 
-        content:
-            # Desc: Content ID
-            id: 'Content ID'
+        # Desc: Content
+        content: 'Content'
 
         event:
             # Desc: Event Data
