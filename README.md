@@ -93,6 +93,7 @@ Defaut values are 15 for both.
 
 <img src="doc/all_activities_.png" />
 
+- Note: Login history will be displayed after installing the bundle and first login
 
 <img src="doc/my_activities_.png" />
 

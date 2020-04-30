@@ -1,4 +1,4 @@
-{% if userInteractiveLoginData is defined %}
+{% if userInteractiveLoginData is not null %}
     <div class="ez-table-header mt-3">
         <div class="ez-table-header__headline">
             {{ 'Activities.log.login_history'|trans|desc('Login History') }}
