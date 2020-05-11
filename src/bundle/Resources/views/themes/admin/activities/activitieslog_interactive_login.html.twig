@@ -1,7 +1,7 @@
 {% if userInteractiveLoginData is defined %}
     <div class="ez-table-header mt-3">
         <div class="ez-table-header__headline">
-            {{ 'Activities.log.login_history'|trans|desc('Login History') }}
+            {{ 'activities.log.login_history'|trans|desc('Login History') }}
         </div>
     </div>
 
@@ -10,31 +10,31 @@
             <tbody>
             <tr>
                 <th scope="row">
-                    {{ 'Activities.log.total_login'|trans|desc('Total login') }}
+                    {{ 'activities.log.total_login'|trans|desc('Total login') }}
                 </th>
                 <td>{{userInteractiveLoginData.loginNumber}}</td>
             </tr>
             <tr>
                 <th scope="row">
-                    {{ 'Activities.log.last_login_date'|trans|desc('Last login date') }}
+                    {{ 'activities.log.last_login_date'|trans|desc('Last login date') }}
                 </th>
                 <td>{{userInteractiveLoginData.lastLogin.date|ez_short_datetime}}</td>
             </tr>
             <tr>
                 <th scope="row">
-                    {{ 'Activities.log.password_expired'|trans|desc('Password expired') }}
+                    {{ 'activities.log.password_expired'|trans|desc('Password expired') }}
                 </th>
                 <td>
                     {% if userInteractiveLoginData.passwordExpired %}
-                        {{ 'Activities.log.yes'|trans|desc('Yes') }}
+                        {{ 'activities.log.yes'|trans|desc('Yes') }}
                     {% else %}
-                        {{ 'Activities.log.no'|trans|desc('No') }}
+                        {{ 'activities.log.no'|trans|desc('No') }}
                     {% endif %}
                 </td>
             </tr>
             <tr>
                 <th scope="row">
-                    {{ 'Activities.log.password_expiration_date'|trans|desc('Expiration Date') }}
+                    {{ 'activities.log.password_expiration_date'|trans|desc('Expiration Date') }}
                 </th>
                 <td>
                     {% if userInteractiveLoginData.passwordExpirationDate %}
@@ -49,7 +49,7 @@
                             })|desc('Current password <b>expires today</b>')|raw }}
                         {% endif %}
                     {% else %}
-                        {{ 'Activities.log.no'|trans|desc('No') }}
+                        {{ 'activities.log.no'|trans|desc('No') }}
                     {% endif %}
                 </td>
             </tr>
