@@ -1,3 +1,7 @@
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/arfaram/ezplatform-activities-log?style=flat-square&color=blue)
+[![Downloads](https://img.shields.io/packagist/dt/arfaram/ezplatform-activities-log?style=flat-square&color=blue)](https://packagist.org/packages/arfaram/ezplatform-activities-log)
+[![License](https://img.shields.io/packagist/l/arfaram/ezplatform-activities-log.svg?style=flat-square&color=blue)](https://github.com/arfaram/ezplatform-activities-log/blob/master/LICENSE)
+
 # eZ Platform ActivitiesLog Bundle
 
 This bundle allows you to log user and system events from the UI or using API. See screenshots.
