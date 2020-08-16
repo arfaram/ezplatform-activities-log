@@ -1,4 +1,4 @@
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/arfaram/ezplatform-activities-log?style=flat-square&color=blue)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/arfaram/ezplatform-activities-log?style=flat-square&color=blue)](https://github.com/arfaram/ezplatform-activities-log/tags)
 [![Downloads](https://img.shields.io/packagist/dt/arfaram/ezplatform-activities-log?style=flat-square&color=blue)](https://packagist.org/packages/arfaram/ezplatform-activities-log)
 [![License](https://img.shields.io/packagist/l/arfaram/ezplatform-activities-log.svg?style=flat-square&color=blue)](https://github.com/arfaram/ezplatform-activities-log/blob/master/LICENSE)
 
