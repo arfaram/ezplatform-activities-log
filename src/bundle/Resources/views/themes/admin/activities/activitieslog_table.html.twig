@@ -8,7 +8,7 @@
 </div>
 
 <div class="ez-scrollable-table-wrapper">
-    <table class="table">
+    <table class="ez-table table table-hover">
         <thead>
         <tr>
             <th class="ez-table__header-cell">{{ 'activities.log.content'|trans|desc('Content') }}</th>
@@ -18,7 +18,7 @@
             <th class="ez-table__header-cell">{{ 'activities.log.event.date'|trans|desc('Date') }}</th>
         </tr>
         </thead>
-        <tbody class="table_row">
+        <tbody>
         {% for log in pagination.currentPageResults %}
             <tr>
                 <td class="ez-table__cell">

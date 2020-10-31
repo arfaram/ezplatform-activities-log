@@ -12,7 +12,7 @@
 {% endif %}
 
 {% if pagination.haveToPaginate %}
-    {{  include('@ezdesign/content/tab/pagination.html.twig', {
+    {{  include('@ezdesign/ui/pagination.html.twig', {
         'pager': pagination,
         'paginaton_params': {
             'routeName': activities_pagination_params.route_name,
