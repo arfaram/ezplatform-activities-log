@@ -10,7 +10,9 @@ It is a lightweight implementation compared to [EdgarEzUIAuditBundle](https://gi
 
 ## Requirement
 
-eZ Platform **3.x +**
+eZ Platform **3.2 +**
+
+>Please Note that this bundle is also available for eZ Platform 3.0 and 3.1 then you have to use `arfaram/ezplatform-activities-log:^2.1` when using `composer require` and read the README file corresponding to version 2.x 
 
 >Please Note that this bundle is also available for eZ Platform 2.x then you have to use `arfaram/ezplatform-activities-log:^1.0` when using `composer require` and read the README file corresponding to version 1.x 
 
