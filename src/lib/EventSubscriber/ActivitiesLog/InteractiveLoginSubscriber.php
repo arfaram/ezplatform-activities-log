@@ -3,7 +3,7 @@
 namespace EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLog;
 
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent as BaseInteractiveLoginEvent;
-use eZ\Publish\Core\MVC\Symfony\Security\UserInterface as eZUser;
+use Ibexa\Core\MVC\Symfony\Security\UserInterface as eZUser;
 use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Core\User\UserInterface;
 

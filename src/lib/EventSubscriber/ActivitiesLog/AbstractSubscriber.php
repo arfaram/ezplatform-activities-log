@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLog;
 
 use Doctrine\ORM\EntityManagerInterface;
-use eZ\Publish\API\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -20,14 +20,14 @@ abstract class AbstractSubscriber implements EventSubscriberInterface
     /** @var \EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog */
     protected $activitiesLog;
 
-    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     protected $permissionResolver;
 
     /**
      * AbstractSubscriber constructor.
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      * @param \EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog $activitiesLog
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \Ibexa\Contracts\Core\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         EntityManagerInterface $entityManager,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EzPlatform\ActivitiesLog\Repository\Value;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 class InteractiveLoginData extends ValueObject
 {

@@ -13,8 +13,8 @@ class EzPlatformActivitiesLogBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        /** @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension $kernelExtension */
-        $kernelExtension = $container->getExtension('ezpublish');
+        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $kernelExtension */
+        $kernelExtension = $container->getExtension('ibexa');
         $kernelExtension->addPolicyProvider(new UIEzPlatformActivitiesLogPolicyProvider($this->getPath()));
     }
 }

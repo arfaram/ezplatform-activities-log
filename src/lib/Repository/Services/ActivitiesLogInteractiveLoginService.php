@@ -2,7 +2,7 @@
 
 namespace EzPlatform\ActivitiesLog\Repository\Services;
 
-use eZ\Publish\API\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\UserService;
 use EzPlatform\ActivitiesLog\Repository\Value\InteractiveLoginData;
 
 /**
@@ -13,13 +13,13 @@ class ActivitiesLogInteractiveLoginService
     /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService */
     private $activitiesLogRepositoryService;
 
-    /** @var \eZ\Publish\API\Repository\UserService */
+    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
     /**
      * ActivitiesLogInteractiveLoginService constructor.
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService $activitiesLogRepositoryService
-     * @param \eZ\Publish\API\Repository\UserService $userService
+     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
      */
     public function __construct(
         ActivitiesLogRepositoryService $activitiesLogRepositoryService,
@@ -32,7 +32,7 @@ class ActivitiesLogInteractiveLoginService
     /**
      * @param $userId
      * @return \EzPlatform\ActivitiesLog\Repository\Value\InteractiveLoginData|null
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getInteractiveLoginData($userId): ?InteractiveLoginData
     {

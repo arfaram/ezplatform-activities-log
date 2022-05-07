@@ -1,9 +1,10 @@
 {
     "name": "arfaram/ezplatform-activities-log",
     "type": "ezplatform-bundle",
-    "description": "UI Interface for several system activities and user history for eZ Platform 3+",
+    "description": "UI Interface for several system activities and user history for eZ Platform Ibexa 4+",
     "keywords": [
-        "ezplatform"
+        "ezplatform",
+        "ibexa"
     ],
     "homepage": "https://github.com/arfaram/ezplatform-activities-log",
     "license": "GPL-2.0-only",
@@ -21,8 +22,8 @@
     },
     "require": {
         "php": "^7.3",
-        "ezsystems/ezplatform-kernel": "^1.0",
-        "ezsystems/ezplatform-admin-ui": "^2.0",
-        "doctrine/orm": "^2.6"
+        "ibexa/core": "^4.0",
+        "ibexa/admin-ui": "^4.0",
+        "doctrine/orm": "^2.12"
     }
 }

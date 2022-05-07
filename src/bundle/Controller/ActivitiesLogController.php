@@ -3,11 +3,11 @@
 namespace EzPlatform\ActivitiesLogBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use eZ\Publish\API\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService;
 use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
-use EzSystems\EzPlatformAdminUiBundle\Controller\Controller as BaseController;
+use Ibexa\Contracts\AdminUi\Controller\Controller as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 
 class ActivitiesLogController extends BaseController
@@ -20,7 +20,7 @@ class ActivitiesLogController extends BaseController
     /** @var \EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog */
     private $activitiesLog;
 
-    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     private $permissionResolver;
 
     /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService */
@@ -39,7 +39,7 @@ class ActivitiesLogController extends BaseController
      * ActivitiesLogController constructor.
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      * @param \EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog $activitiesLog
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
+     * @param \Ibexa\Contracts\Core\Repository\PermissionResolver $permissionResolver
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService $activitiesLogRepositoryService
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService $activitiesLogInteractiveLogin
      * @param int $activitiesLogUiPanelPaginationLimit
@@ -66,13 +66,13 @@ class ActivitiesLogController extends BaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function allActivitiesAction(Request $request)
     {
         if (!$this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_all')) {
             return $this->render(
-                '@ezdesign/activities/activitieslog_view.html.twig',
+                '@ibexadesign/activities/activitieslog_view.html.twig',
                 [
                     'access_denied' => 'access_denied',
                 ]
@@ -82,7 +82,7 @@ class ActivitiesLogController extends BaseController
         $pagerfanta = $this->activitiesLogRepositoryService->getPageResults($this->activitiesLogUiPanelPaginationLimit, $page);
 
         return $this->render(
-            '@ezdesign/activities/activitieslog_view.html.twig',
+            '@ibexadesign/activities/activitieslog_view.html.twig',
             [
                 'pagination' => $pagerfanta,
             ]
@@ -92,13 +92,13 @@ class ActivitiesLogController extends BaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function myActivitiesAction(Request $request)
     {
         if (!$this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_my')) {
             return $this->render(
-                '@ezdesign/activities/activitieslog_view.html.twig',
+                '@ibexadesign/activities/activitieslog_view.html.twig',
                 [
                     'access_denied' => 'access_denied',
                 ]
@@ -116,7 +116,7 @@ class ActivitiesLogController extends BaseController
         );
 
         return $this->render(
-            '@ezdesign/activities/activitieslog_view.html.twig',
+            '@ibexadesign/activities/activitieslog_view.html.twig',
             [
                 'pagination' => $pagerfanta,
                 'userInteractiveLoginData' => $this->activitiesLogInteractiveLogin->getInteractiveLoginData($userId),

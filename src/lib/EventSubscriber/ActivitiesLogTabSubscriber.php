@@ -2,8 +2,8 @@
 
 namespace EzPlatform\ActivitiesLog\EventSubscriber;
 
-use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent;
-use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
+use Ibexa\AdminUi\Tab\Event\TabEvent;
+use Ibexa\AdminUi\Tab\Event\TabEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -39,7 +39,7 @@ class ActivitiesLogTabSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param \EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent $event
+     * @param \Ibexa\AdminUi\Tab\Event\TabEvent $event
      */
     public function onTabPreRender(TabEvent $event)
     {

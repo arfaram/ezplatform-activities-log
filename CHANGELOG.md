@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### 4.0
+
+- Upgrade to eZ Ibexa 4 
+
 ### 2.1
 - activitieslog Interactive Login
     - Total login number

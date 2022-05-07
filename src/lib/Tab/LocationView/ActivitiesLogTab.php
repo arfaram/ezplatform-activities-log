@@ -2,35 +2,31 @@
 
 namespace EzPlatform\ActivitiesLog\Tab\LocationView;
 
-use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService;
 use EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService;
-use EzSystems\EzPlatformAdminUi\Specification\ContentType\ContentTypeIsUser;
-use EzSystems\EzPlatformAdminUi\Tab\AbstractEventDispatchingTab;
-use EzSystems\EzPlatformAdminUi\Tab\ConditionalTabInterface;
-use EzSystems\EzPlatformAdminUi\Tab\OrderedTabInterface;
+use Ibexa\AdminUi\Specification\ContentType\ContentTypeIsUser;
+use Ibexa\Contracts\AdminUi\Tab\AbstractEventDispatchingTab;
+use Ibexa\Contracts\AdminUi\Tab\ConditionalTabInterface;
+use Ibexa\Contracts\AdminUi\Tab\OrderedTabInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTabInterface, ConditionalTabInterface
 {
     /** @var string */
-    public const URI_FRAGMENT = 'ez-tab-location-view-activitiesLog';
+    public const URI_FRAGMENT = 'ibexa-tab-location-view-activitiesLog';
 
-    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     private $permissionResolver;
 
-    /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     private $configResolver;
 
     /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService */
     private $activitiesLogRepositoryService;
-
-    /** @var \Symfony\Component\HttpFoundation\RequestStack */
-    private $requestStack;
 
     /** @var \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService */
     private $activitiesLogInteractiveLogin;
@@ -40,10 +36,9 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
      * @param \Twig\Environment $twig
      * @param \Symfony\Contracts\Translation\TranslatorInterface $translator
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \eZ\Publish\API\Repository\PermissionResolver $permissionResolver
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param \Ibexa\Contracts\Core\Repository\PermissionResolver $permissionResolver
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogRepositoryService $activitiesLogRepositoryService
-     * @param \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param \EzPlatform\ActivitiesLog\Repository\Services\ActivitiesLogInteractiveLoginService $activitiesLogInteractiveLogin
      */
     public function __construct(
@@ -51,14 +46,12 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
         TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
         PermissionResolver $permissionResolver,
-        RequestStack $requestStack,
         ActivitiesLogRepositoryService $activitiesLogRepositoryService,
         ConfigResolverInterface $configResolver,
         ActivitiesLogInteractiveLoginService $activitiesLogInteractiveLogin
     ) {
         parent::__construct($twig, $translator, $eventDispatcher);
         $this->permissionResolver = $permissionResolver;
-        $this->requestStack = $requestStack;
         $this->activitiesLogRepositoryService = $activitiesLogRepositoryService;
         $this->configResolver = $configResolver;
         $this->activitiesLogInteractiveLogin = $activitiesLogInteractiveLogin;
@@ -92,8 +85,8 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
     /**
      * @param array $parameters
      * @return bool
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function evaluate(array $parameters): bool
     {
@@ -113,17 +106,17 @@ class ActivitiesLogTab extends AbstractEventDispatchingTab implements OrderedTab
      */
     public function getTemplate(): string
     {
-        return '@ezdesign/content/tab/activitieslog_user_tab.html.twig';
+        return '@ibexadesign/content/tab/activitieslog_user_tab.html.twig';
     }
 
     /**
      * @param array $contextParameters
      * @return array
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getTemplateParameters(array $contextParameters = []): array
     {
-        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $location = $contextParameters['location'];
         $userId = $location->getContentInfo()->id;
 

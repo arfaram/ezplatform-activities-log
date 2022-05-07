@@ -2,6 +2,7 @@
 
 namespace EzPlatform\ActivitiesLog\Repository\Services;
 
+use Doctrine\ORM\QueryBuilder;
 use EzPlatform\ActivitiesLog\Repository\Pagination\ActivitiesLogPagination;
 use EzPlatform\ActivitiesLog\Repository\Storage\Doctrine\ActivitiesLogRepository;
 use Pagerfanta\Pagerfanta;
@@ -13,7 +14,7 @@ class ActivitiesLogRepositoryService
     /** @var \EzPlatform\ActivitiesLog\Repository\Storage\Doctrine\ActivitiesLogRepository $activitiesLogRepository */
     private $activitiesLogRepository;
 
-    /** @var \Doctrine\ORM\QueryBuilder\QueryBuilder $queryBuilder */
+    /** @var QueryBuilder $queryBuilder */
     public $queryBuilder;
 
     /**

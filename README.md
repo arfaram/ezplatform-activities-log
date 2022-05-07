@@ -2,33 +2,35 @@
 [![Downloads](https://img.shields.io/packagist/dt/arfaram/ezplatform-activities-log?style=flat-square&color=blue)](https://packagist.org/packages/arfaram/ezplatform-activities-log)
 [![License](https://img.shields.io/packagist/l/arfaram/ezplatform-activities-log.svg?style=flat-square&color=blue)](https://github.com/arfaram/ezplatform-activities-log/blob/master/LICENSE)
 
-# eZ Platform ActivitiesLog Bundle
+# eZ Platform / Ibexa ActivitiesLog Bundle
 
 This bundle allows you to log user and system events from the UI or using API. See screenshots.
 
-It is a lightweight implementation compared to [EdgarEzUIAuditBundle](https://github.com/noodle69/EdgarEzUIAuditBundle) (!only for eZ Platform 2.x) which provide more details. 
+It is a lightweight implementation compared to [EdgarEzUIAuditBundle](https://github.com/noodle69/EdgarEzUIAuditBundle) (!only for eZ Platform /Ibexa 2.x) which provide more details. 
 
 ## Requirement
 
-eZ Platform **3.2 +**
+Ibexa **4.x +**
 
->Please Note that this bundle is also available for eZ Platform 3.0 and 3.1 then you have to use `arfaram/ezplatform-activities-log:^2.1` when using `composer require` and read the README file corresponding to version 2.x 
+>Note that this bundle is also available for eZ Platform 3.2. You have to require `arfaram/ezplatform-activities-log:^3.2` and read the README file corresponding to version 3.2 
 
->Please Note that this bundle is also available for eZ Platform 2.x then you have to use `arfaram/ezplatform-activities-log:^1.0` when using `composer require` and read the README file corresponding to version 1.x 
+>Note that this bundle is also available for eZ Platform 3.0 and 3.1. You have to require `arfaram/ezplatform-activities-log:^2.1` and read the README file corresponding to version 2.x 
+
+>Note that this bundle is also available for eZ Platform 2.x. You have to require `arfaram/ezplatform-activities-log:^1.0` and read the README file corresponding to version 1.x 
 
 ## Features
 
-- Content ~~All user and system~~ activities based on ezplatform AfterEvent (* See limitations)
-- Current logged in user activities
+- Content activities based on ibexa AfterEvent (* See limitations)
+- Current logged-in user activities
 - Activities on user level
 - Several policies to allow user the access to the activities panels
-- New in 2.1: user Login History, see CHANGELOG file for more details or see screeshots below
+- User Login History, see CHANGELOG file for more details or see screeshots below
 
 
 ## Limitations
-(*) in eZ Platform 2.x it was possible to trigger all API events based on `MVCEvents::API_SIGNAL`. The Signal provides an object and it was easy to serialize it and save it in the DB. EZ Platform 3 introduces `Before` and `After` Events which provide several objects like content, contentInfo, VersionInfo etc. So it is no longer possible to serialize these objects anymore. On one hand it is easy to gather a lot of information from the several Events but on the other hand it makes the EventSubsriber implementation very long.
+(*) in eZ Platform 2.x it was possible to trigger all API events based on `MVCEvents::API_SIGNAL`. The Signal provides an object and it was easy to serialize it and save it in the DB. Ibexa 3 introduces `Before` and `After` Events which provide several objects like content, contentInfo, VersionInfo etc. So it is no longer possible to serialize these objects anymore. On one hand it is easy to gather a lot of information from the several Events but on the other hand it makes the EventSubscriber implementation very long.
 
-- In this version I started only with content AfterEvents:
+- This version supports:
     - HideContentEvent
     - RevealContentEvent
     - CopyContentEvent
@@ -38,7 +40,7 @@ eZ Platform **3.2 +**
     - UpdateContentEvent
     - PublishVersionEvent
 
-Other `AfterEvents` will be added gradually :) best way to learn eZ Platform. Any contribution is welcome
+Other `Events` will be added gradually :)  Any contribution is welcome
  
 ## Installation
 
@@ -65,17 +67,22 @@ ez_platform_activities_log:
  php bin/console doctrine:schema:validate
 ```
 
+### Dump SQL
+```
+php bin/console doctrine:schema:update --dump-sql
+```
+
 ### Create the database table
 
 ```
-php bin/console doctrine:schema:update --force
+php bin/console doctrine:schema:update --dump-sql --force
 ```
 
 Note: use `doc/mysql.sql` to create the DB `activities_log` table if you got some doctrine issues 
 
 ## Override pagination values
 
-Add you pagination value to `.env` file:
+Add your pagination value to `.env` file:
 
 ```
 # Activities menus(all, me)
@@ -93,7 +100,7 @@ parameters:
     env(ACTIVITIESLOG_USER_TAB_PAGINATION_LIMIT): XX
 ```
 
-Defaut values are 15 for both.
+Default values are 15 for both.
 
 ## Screenshots
 

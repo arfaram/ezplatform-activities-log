@@ -2,15 +2,15 @@
 
 namespace EzPlatform\ActivitiesLogBundle\Twig;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Repository as RepositoryInterface;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Repository as RepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class ActivitiesLogExtension extends AbstractExtension
 {
-    /** @var \eZ\Publish\API\Repository\Repository */
+    /** @var \Ibexa\Contracts\Core\Repository\Repository */
     private $repository;
 
     /** @var \Psr\Log\LoggerInterface */

@@ -2,14 +2,14 @@
 
 namespace EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLog;
 
-use eZ\Publish\API\Repository\Events\Content\CopyContentEvent;
-use eZ\Publish\API\Repository\Events\Content\CreateContentDraftEvent;
-use eZ\Publish\API\Repository\Events\Content\DeleteContentEvent;
-use eZ\Publish\API\Repository\Events\Content\DeleteVersionEvent;
-use eZ\Publish\API\Repository\Events\Content\HideContentEvent;
-use eZ\Publish\API\Repository\Events\Content\PublishVersionEvent;
-use eZ\Publish\API\Repository\Events\Content\RevealContentEvent;
-use eZ\Publish\API\Repository\Events\Content\UpdateContentEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\CopyContentEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\CreateContentDraftEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\DeleteContentEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\DeleteVersionEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\HideContentEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\PublishVersionEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\RevealContentEvent;
+use Ibexa\Contracts\Core\Repository\Events\Content\UpdateContentEvent;
 
 /**
  * Class ContentEventsSubscriber.
@@ -34,7 +34,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Events\Content\HideContentEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\HideContentEvent $event
      * @throws \Exception
      */
     public function onHideContent(HideContentEvent $event)
@@ -52,7 +52,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Events\Content\RevealContentEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\RevealContentEvent $event
      * @throws \Exception
      */
     public function onRevealContent(RevealContentEvent $event)
@@ -70,7 +70,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Events\Content\CopyContentEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\CopyContentEvent $event
      * @throws \Exception
      */
     public function onCopyContent(CopyContentEvent $event)
@@ -89,7 +89,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Events\Content\DeleteContentEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\DeleteContentEvent $event
      * @throws \Exception
      */
     public function onDeleteContentEvent(DeleteContentEvent $event)
@@ -108,7 +108,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
 
     /**
      * @todo Bug: delete multiple version trigger only the last deleted one
-     * @param \eZ\Publish\API\Repository\Events\Content\DeleteVersionEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\DeleteVersionEvent $event
      * @throws \Exception
      */
     public function onDeleteVersionEvent(DeleteVersionEvent $event): void
@@ -127,7 +127,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Events\Content\CreateContentDraftEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\CreateContentDraftEvent $event
      * @throws \Exception
      */
     public function onCreateContentDraftEvent(CreateContentDraftEvent $event): void
@@ -146,7 +146,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Events\Content\UpdateContentEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\UpdateContentEvent $event
      * @throws \Exception
      */
     public function onUpdateContentEvent(UpdateContentEvent $event): void
@@ -171,7 +171,7 @@ final class ContentEventsSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \eZ\Publish\API\Repository\Events\Content\PublishVersionEvent $event
+     * @param \Ibexa\Contracts\Core\Repository\Events\Content\PublishVersionEvent $event
      * @throws \Exception
      */
     public function onPublishVersionEvent(PublishVersionEvent $event): void

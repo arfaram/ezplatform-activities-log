@@ -1,6 +1,6 @@
 services:
     #Activities tab only for users
     EzPlatform\ActivitiesLog\Tab\LocationView\ActivitiesLogTab:
-        parent: EzSystems\EzPlatformAdminUi\Tab\AbstractTab
+        parent: Ibexa\Contracts\AdminUi\Tab\AbstractTab
         tags:
-            - { name: ezplatform.tab, group: location-view }
+            - { name: 'ibexa.admin_ui.tab', group: 'location-view' }
