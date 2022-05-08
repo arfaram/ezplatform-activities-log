@@ -2,7 +2,7 @@
 [![Downloads](https://img.shields.io/packagist/dt/arfaram/ezplatform-activities-log?style=flat-square&color=blue)](https://packagist.org/packages/arfaram/ezplatform-activities-log)
 [![License](https://img.shields.io/packagist/l/arfaram/ezplatform-activities-log.svg?style=flat-square&color=blue)](https://github.com/arfaram/ezplatform-activities-log/blob/master/LICENSE)
 
-#Available also in premium version with more set of features: [more infos](https://ramzi-arfaoui.de/ez-platform-ibexa-bundles/)
+# Available also in premium version with more set of features: [more infos](https://ramzi-arfaoui.de/ez-platform-ibexa-bundles/)
 
 # eZ Platform / Ibexa ActivitiesLog Bundle (open source)
 
