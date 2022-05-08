@@ -2,7 +2,9 @@
 [![Downloads](https://img.shields.io/packagist/dt/arfaram/ezplatform-activities-log?style=flat-square&color=blue)](https://packagist.org/packages/arfaram/ezplatform-activities-log)
 [![License](https://img.shields.io/packagist/l/arfaram/ezplatform-activities-log.svg?style=flat-square&color=blue)](https://github.com/arfaram/ezplatform-activities-log/blob/master/LICENSE)
 
-# eZ Platform / Ibexa ActivitiesLog Bundle
+#Available also in premium version with more set of features: [more infos](https://ramzi-arfaoui.de/ez-platform-ibexa-bundles/)
+
+# eZ Platform / Ibexa ActivitiesLog Bundle (open source)
 
 This bundle allows you to log user and system events from the UI or using API. See screenshots.
 
