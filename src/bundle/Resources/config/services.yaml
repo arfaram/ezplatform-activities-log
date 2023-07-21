@@ -8,6 +8,8 @@ services:
         autowire: true
         autoconfigure: true
         public: true
+        bind:
+            $siteAccessService : '@ezpublish.siteaccess_service'
 
 #    EzPlatform\ActivitiesLogBundle\Controller\:
 #        resource: '../../Controller'
@@ -35,6 +37,7 @@ services:
 
     #Tab helper to get current logged in user
     EzPlatform\ActivitiesLog\Repository\User: ~
+    EzPlatform\ActivitiesLogBundle\Helper\DoctrineHelper: ~
 
     #Add view parameters
     EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLogTabSubscriber:

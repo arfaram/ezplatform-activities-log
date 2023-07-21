@@ -1,74 +1,67 @@
-{% include '@ibexadesign/activities/activitieslog_interactive_login.html.twig' %}
+{% include '@ezdesign/activities/activitieslog_interactive_login.html.twig' %}
 
-<div class="ibexa-header-wrapper">
-    <div class="ibexa-page-title">
-        <div class="ibexa-page-title__top">
-            <h1 class="ibexa-page-title__title">
-                {{ 'activities.log.view'|trans|desc('Activities Log') }} ({{ pagination.count }})
-            </h1>
-        </div>
-        <div class="ibexa-page-title__bottom">
-        </div>
+<div class="ez-table-header mt-3">
+    <div class="ez-table-header__headline">
+        {{ 'activities.log.view'|trans|desc('Activities Log') }}
+        ({{ pagination.count }})
     </div>
 </div>
 
-<section class="container ibexa-container">
-    <div class="ez-scrollable-table-wrapper">
-        <table class="ibexa-table table">
-            <thead>
-            <tr class="ibexa-table__head-row">
-                <th class="ibexa-table__header-cell">{{ 'activities.log.content'|trans|desc('Content') }}</th>
-                <th class="ibexa-table__header-cell">{{ 'activities.log.user'|trans|desc('User') }}</th>
-                <th class="ibexa-table__header-cell">{{ 'activities.log.event.name'|trans|desc('Event Name') }}</th>
-                <th class="ibexa-table__header-cell">{{ 'activities.log.event.data'|trans|desc('Event Data') }}</th>
-                <th class="ibexa-table__header-cell">{{ 'activities.log.event.date'|trans|desc('Date') }}</th>
-            </tr>
-            </thead>
-            <tbody class="ibexa-table__body">
-            {% for log in pagination.currentPageResults %}
-                <tr class="ibexa-table__row">
-                    <td class="ibexa-table__cell">
-                        {% if log.contentObjectId is not null %}
-                            {% set content = get_content(log.contentObjectId) %}
-                            {% if content is not null and content.versionInfo.contentInfo.status == 1%}
-                                <a href="{{ path( "ibexa.content.view", {"contentId": log.contentObjectId} ) }}">{{ ez_content_name(content) }}</a>
-                            {% else %}
-                                {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.contentObjectId }}
-                            {% endif %}
-                        {% endif %}
-                    </td>
-                    <td class="ibexa-table__cell">
-                        {% set user = get_content(log.userId) %}
-                        {% if user is not null %}
-                            {{ ez_content_name(user) }}
+<div class="ez-scrollable-table-wrapper">
+    <table class="ez-table table table-hover">
+        <thead>
+        <tr>
+            <th class="ez-table__header-cell">{{ 'activities.log.content'|trans|desc('Content') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.user'|trans|desc('User') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.event.name'|trans|desc('Event Name') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.event.data'|trans|desc('Event Data') }}</th>
+            <th class="ez-table__header-cell">{{ 'activities.log.event.date'|trans|desc('Date') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log in pagination.currentPageResults %}
+            <tr>
+                <td class="ez-table__cell">
+                    {% if log.contentObjectId is not null %}
+                        {% set content = get_content(log.contentObjectId) %}
+                        {% if content is not null and content.versionInfo.contentInfo.status == 1%}
+                            <a href="{{ path( "_ez_content_view", {"contentId": log.contentObjectId} ) }}">{{ ez_content_name(content) }}</a>
                         {% else %}
-                            {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.userId }}
+                            {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.contentObjectId }}
                         {% endif %}
-                    </td>
-                    <td class="ibexa-table__cell">{{ log.eventName }}</td>
-                    <td class="ibexa-table__cell">
-                        {% set signalDataEntries = data_unserialize(log.data) %}
-                        {% for key, signalDataValue in signalDataEntries %}
-                            <li>
-                                {{ key }}:
-                                {% set value = check_value_type(signalDataValue) %}
-                                {% if value == 'array' %}
-                                    <ul>
-                                        {% for key, value in signalDataValue %}
-                                            <li>{{ key }}: {{ value }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% else %}
-                                    {{ value }}
-                                {% endif %}
-                            </li>
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">
+                    {% set user = get_content(log.userId) %}
+                    {% if user is not null %}
+                        {{ ez_content_name(user) }}
+                    {% else %}
+                        {{ 'activities.log.user.not.found'|trans|desc('Not Found') }}: {{ log.userId }}
+                    {% endif %}
+                </td>
+                <td class="ez-table__cell">{{ log.eventName }}</td>
+                <td class="ez-table__cell">
+                    {% set signalDataEntries = data_unserialize(log.data) %}
+                    {% for key, signalDataValue in signalDataEntries %}
+                        <li>
+                            {{ key }}:
+                            {% set value = check_value_type(signalDataValue) %}
+                            {% if value == 'array' %}
+                                <ul>
+                                    {% for key, value in signalDataValue %}
+                                        <li>{{ key }}: {{ value }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ value }}
+                            {% endif %}
+                        </li>
 
-                        {% endfor %}
-                    </td>
-                    <td class="ibexa-table__cell">{{ log.date|ez_short_datetime }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</section>
+                    {% endfor %}
+                </td>
+                <td>{{ log.date|ez_short_datetime }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

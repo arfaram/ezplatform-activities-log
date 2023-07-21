@@ -1,69 +1,61 @@
 {% if userInteractiveLoginData is defined and userInteractiveLoginData is not null %}
-    <div class="ibexa-header-wrapper">
-        <div class="ibexa-page-title">
-            <div class="ibexa-page-title__top">
-                <h1 class="ibexa-page-title__title">
-                    {{ 'activities.log.login_history'|trans|desc('Login History') }}
-                </h1>
-            </div>
-            <div class="ibexa-page-title__bottom">
-            </div>
+    <div class="ez-table-header mt-3">
+        <div class="ez-table-header__headline">
+            {{ 'activities.log.login_history'|trans|desc('Login History') }}
         </div>
     </div>
 
-    <section class="container ibexa-container">
-        <div class="ez-scrollable-table-wrapper">
-            <table class="table table-borderless">
-                <tbody>
-                <tr>
-                    <th scope="row">
-                        {{ 'activities.log.total_login'|trans|desc('Total login') }}
-                    </th>
-                    <td>{{userInteractiveLoginData.loginNumber}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        {{ 'activities.log.last_login_date'|trans|desc('Last login date') }}
-                    </th>
-                    <td>{{userInteractiveLoginData.lastLogin.date|ez_short_datetime}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        {{ 'activities.log.password_expired'|trans|desc('Password expired') }}
-                    </th>
-                    <td>
-                        {% if userInteractiveLoginData.passwordExpired %}
-                            {{ 'activities.log.yes'|trans|desc('Yes') }}
+    <div class="ez-scrollable-table-wrapper">
+        <table class="table table-borderless">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    {{ 'activities.log.total_login'|trans|desc('Total login') }}
+                </th>
+                <td>{{userInteractiveLoginData.loginNumber}}</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    {{ 'activities.log.last_login_date'|trans|desc('Last login date') }}
+                </th>
+                <td>{{userInteractiveLoginData.lastLogin.date|ez_short_datetime}}</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    {{ 'activities.log.password_expired'|trans|desc('Password expired') }}
+                </th>
+                <td>
+                    {% if userInteractiveLoginData.passwordExpired %}
+                        {{ 'activities.log.yes'|trans|desc('Yes') }}
+                    {% else %}
+                        {{ 'activities.log.no'|trans|desc('No') }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    {{ 'activities.log.password_expiration_date'|trans|desc('Expiration Date') }}
+                </th>
+                <td>
+                    {% if userInteractiveLoginData.passwordExpirationDate %}
+                        {% set password_expire_in = userInteractiveLoginData.passwordExpirationDate %}
+
+                        {% if password_expire_in.d > 0 %}
+                            {{ 'ezuser.password_expires_in'|trans({
+                                '%count%': password_expire_in.d + (password_expire_in.h >= 12 ? 1 : 0)
+                            })|desc('Current password <b>expires in %count% days</b>')|raw }}
                         {% else %}
-                            {{ 'activities.log.no'|trans|desc('No') }}
+                            {{ 'ezuser.password_expires_today'|trans({
+                            })|desc('Current password <b>expires today</b>')|raw }}
                         {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        {{ 'activities.log.password_expiration_date'|trans|desc('Expiration Date') }}
-                    </th>
-                    <td>
-                        {% if userInteractiveLoginData.passwordExpirationDate %}
-                            {% set password_expire_in = userInteractiveLoginData.passwordExpirationDate %}
-
-                            {% if password_expire_in.d > 0 %}
-                                {{ 'ezuser.password_expires_in'|trans({
-                                    '%count%': password_expire_in.d + (password_expire_in.h >= 12 ? 1 : 0)
-                                })|desc('Current password <b>expires in %count% days</b>')|raw }}
-                            {% else %}
-                                {{ 'ezuser.password_expires_today'|trans({
-                                })|desc('Current password <b>expires today</b>')|raw }}
-                            {% endif %}
-                        {% else %}
-                            {{ 'activities.log.no'|trans|desc('No') }}
-                        {% endif %}
-                    </td>
-                </tr>
+                    {% else %}
+                        {{ 'activities.log.no'|trans|desc('No') }}
+                    {% endif %}
+                </td>
+            </tr>
 
 
-                </tbody>
-            </table>
-        </div>
-    </section>
+            </tbody>
+        </table>
+    </div>
 {% endif %}

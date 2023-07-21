@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLog;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Doctrine\ORM\Exception\ORMException;
+use eZ\Publish\API\Repository\PermissionResolver;
 use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
+use EzPlatform\ActivitiesLogBundle\Helper\DoctrineHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -14,35 +16,24 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 abstract class AbstractSubscriber implements EventSubscriberInterface
 {
-    /** @var \Doctrine\ORM\EntityManagerInterface */
-    protected $entityManager;
+    protected EntityManagerInterface $entityManager;
+    protected ActivitiesLog $activitiesLog;
 
-    /** @var \EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog */
-    protected $activitiesLog;
+    protected PermissionResolver $permissionResolver;
+    protected DoctrineHelper $doctrineHelper;
 
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
-    protected $permissionResolver;
-
-    /**
-     * AbstractSubscriber constructor.
-     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
-     * @param \EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog $activitiesLog
-     * @param \Ibexa\Contracts\Core\Repository\PermissionResolver $permissionResolver
-     */
     public function __construct(
         EntityManagerInterface $entityManager,
         ActivitiesLog $activitiesLog,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        DoctrineHelper $doctrineHelper
     ) {
-        $this->entityManager = $entityManager;
-        $this->activitiesLog = $activitiesLog;
+        $this->entityManager      = $entityManager;
+        $this->activitiesLog      = $activitiesLog;
         $this->permissionResolver = $permissionResolver;
+        $this->doctrineHelper     = $doctrineHelper;
     }
 
-    /**
-     * @param $event
-     * @return string
-     */
     protected function getClassNameSpace($event): string
     {
         $getClassNameSpace = explode('\\', \get_class($event));
@@ -51,9 +42,9 @@ abstract class AbstractSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param $event
-     * @return $this
      * @throws \Exception
+     *
+     * @return $this
      */
     protected function setDefaultData($event)
     {
@@ -65,12 +56,14 @@ abstract class AbstractSubscriber implements EventSubscriberInterface
     }
 
     /**
+     * @throws ORMException
+     *
      * @return $this
      */
     protected function persistData()
     {
-        $this->entityManager->persist($this->activitiesLog);
-        $this->entityManager->flush();
+        $this->doctrineHelper->getCurrentEntityManager()->persist($this->activitiesLog);
+        $this->doctrineHelper->getCurrentEntityManager()->flush();
 
         return $this;
     }

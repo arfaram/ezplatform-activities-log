@@ -2,19 +2,16 @@
 
 namespace EzPlatform\ActivitiesLog\EventSubscriber\ActivitiesLog;
 
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent as BaseInteractiveLoginEvent;
-use Ibexa\Core\MVC\Symfony\Security\UserInterface as eZUser;
-use Symfony\Component\Security\Http\SecurityEvents;
+use eZ\Publish\Core\MVC\Symfony\Security\UserInterface as eZUser;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent as BaseInteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 
 /**
  * Class InteractiveLoginSubscriber.
  */
 final class InteractiveLoginSubscriber extends AbstractSubscriber
 {
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -25,12 +22,11 @@ final class InteractiveLoginSubscriber extends AbstractSubscriber
     }
 
     /**
-     * @param \Symfony\Component\Security\Http\Event\InteractiveLoginEvent $event
      * @throws \Exception
      */
-    public function onInteractiveLogin(BaseInteractiveLoginEvent $event)
+    public function onInteractiveLogin(BaseInteractiveLoginEvent $event): void
     {
-        $token = $event->getAuthenticationToken();
+        $token        = $event->getAuthenticationToken();
         $originalUser = $token->getUser();
 
         if ($originalUser instanceof eZUser || !$originalUser instanceof UserInterface) {
