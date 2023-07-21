@@ -1,5 +1,5 @@
 {
-    "name": "inforca/ezplatform-activities-log",
+    "name": "arfaram/ezplatform-activities-log",
     "type": "ezplatform-bundle",
     "description": "UI Interface for several system activities and user history for eZ Platform 3+",
     "keywords": [
