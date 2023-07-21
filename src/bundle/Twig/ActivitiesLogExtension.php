@@ -2,71 +2,54 @@
 
 namespace EzPlatform\ActivitiesLogBundle\Twig;
 
-use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
-use Ibexa\Contracts\Core\Repository\Repository as RepositoryInterface;
+use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use eZ\Publish\API\Repository\Repository as RepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class ActivitiesLogExtension extends AbstractExtension
 {
-    /** @var \Ibexa\Contracts\Core\Repository\Repository */
-    private $repository;
-
-    /** @var \Psr\Log\LoggerInterface */
-    private $logger;
+    private RepositoryInterface $repository;
+    private LoggerInterface $logger;
 
     public function __construct(
         RepositoryInterface $repository,
         LoggerInterface $logger
     ) {
         $this->repository = $repository;
-        $this->logger = $logger;
+        $this->logger     = $logger;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'activitieslog.extension';
     }
 
-    /**
-     * @return array|\Twig\TwigFunction[]
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
-        return array(
+        return [
             new TwigFunction(
                 'data_unserialize',
-                array($this, 'dataUnserialize')
+                [$this, 'dataUnserialize']
             ),
             new TwigFunction(
                 'check_value_type',
-                array($this, 'checkValueType')
+                [$this, 'checkValueType']
             ),
             new TwigFunction(
                 'get_content',
-                array($this, 'getUserperID')
+                [$this, 'getUserperID']
             ),
-        );
+        ];
     }
 
-    /**
-     * @param $str
-     * @return array
-     */
-    public function dataUnserialize($str)
+    public function dataUnserialize($str): array
     {
-        return  (array) unserialize($str, ['allowed_classes' => false]);
+        return (array) unserialize($str, ['allowed_classes' => false]);
     }
 
-    /**
-     * @param $value
-     * @return bool|string
-     */
-    public function checkValueType($value)
+    public function checkValueType($value): bool|string
     {
         switch (\gettype($value)) {
             case 'integer':
@@ -76,7 +59,7 @@ class ActivitiesLogExtension extends AbstractExtension
             case 'array':
                 return 'array';
             case 'object':
-                //TODO e.g Empty trash
+                // TODO e.g Empty trash
                 return false;
         }
 
@@ -84,8 +67,6 @@ class ActivitiesLogExtension extends AbstractExtension
     }
 
     /**
-     * @param $id
-     * @return mixed
      * @throws \Exception
      */
     public function getUserperID($id)
@@ -95,7 +76,7 @@ class ActivitiesLogExtension extends AbstractExtension
                 try {
                     return $repository->getContentService()->loadContent($id);
                 } catch (NotFoundException $exception) {
-                    //user has been deleted
+                    // user has been deleted
                     $this->logger->warning(sprintf(
                         'Unable to fetch creator content for contentId %s, (original exception: %s)',
                         $id,

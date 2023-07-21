@@ -9,12 +9,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class User
 {
-    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
     /**
      * User constructor.
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
      */
     public function __construct(
         TokenStorageInterface $tokenStorage
@@ -30,8 +28,6 @@ class User
             return;
         }
 
-        $userId = $token->getUser()->getAPIUser()->contentInfo->id;
-
-        return $userId;
+        return $token->getUser()->getAPIUser()->contentInfo->id;
     }
 }

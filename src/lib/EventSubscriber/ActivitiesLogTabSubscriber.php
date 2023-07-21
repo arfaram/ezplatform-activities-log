@@ -2,8 +2,8 @@
 
 namespace EzPlatform\ActivitiesLog\EventSubscriber;
 
-use Ibexa\AdminUi\Tab\Event\TabEvent;
-use Ibexa\AdminUi\Tab\Event\TabEvents;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvent;
+use EzSystems\EzPlatformAdminUi\Tab\Event\TabEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -14,19 +14,17 @@ class ActivitiesLogTabSubscriber implements EventSubscriberInterface
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     private $requestStack;
 
-    /** @var int $activitiesLogUserTabPaginationLimit */
+    /** @var int */
     private $activitiesLogUserTabPaginationLimit;
 
     /**
      * ActivitiesTabSubscriber constructor.
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param $activitiesLogUserTabPaginationLimit
      */
     public function __construct(
         RequestStack $requestStack,
         $activitiesLogUserTabPaginationLimit
     ) {
-        $this->requestStack = $requestStack;
+        $this->requestStack                        = $requestStack;
         $this->activitiesLogUserTabPaginationLimit = $activitiesLogUserTabPaginationLimit;
     }
 
@@ -38,9 +36,6 @@ class ActivitiesLogTabSubscriber implements EventSubscriberInterface
         return [TabEvents::TAB_PRE_RENDER => 'onTabPreRender'];
     }
 
-    /**
-     * @param \Ibexa\AdminUi\Tab\Event\TabEvent $event
-     */
     public function onTabPreRender(TabEvent $event)
     {
         $request = $this->requestStack->getCurrentRequest();

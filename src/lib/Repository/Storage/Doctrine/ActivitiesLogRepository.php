@@ -4,46 +4,42 @@ namespace EzPlatform\ActivitiesLog\Repository\Storage\Doctrine;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
 use Doctrine\Persistence\ManagerRegistry;
+use EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog;
+use EzPlatform\ActivitiesLogBundle\Helper\DoctrineHelper;
 
 /**
  * Class ActivitiesLogRepository.
  */
 class ActivitiesLogRepository extends ServiceEntityRepository
 {
-    /** @var QueryBuilder $queryBuilder */
-    public $queryBuilder;
+    public QueryBuilder $queryBuilder;
+    public DoctrineHelper $doctrineHelper;
 
     /**
      * ActivitiesLogRepository constructor.
-     * @param \Doctrine\Persistence\ManagerRegistry $registry
      */
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, DoctrineHelper $doctrineHelper)
     {
         parent::__construct($registry, ActivitiesLog::class);
+        $this->doctrineHelper = $doctrineHelper;
     }
 
-    /**
-     * @return \Doctrine\ORM\QueryBuilder
-     */
     public function queryBuilder(): QueryBuilder
     {
-        $this->queryBuilder = $this->createQueryBuilder('a')
+        $this->queryBuilder = $this->doctrineHelper->getCurrentEntityManager()->createQueryBuilder('a')
             ->select('a')
+            ->from('EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog', 'a')
             ->orderBy('a.date', 'DESC');
 
         return $this->queryBuilder;
     }
 
-    /**
-     * @param array $params
-     * @return \Doctrine\ORM\QueryBuilder
-     */
     public function queryBuilderPerUserId(array $params): QueryBuilder
     {
-        $this->queryBuilder = $this->createQueryBuilder('a')
+        $this->queryBuilder = $this->doctrineHelper->getCurrentEntityManager()->createQueryBuilder('a')
             ->select('a')
+            ->from('EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog', 'a')
             ->where('a.userId = ?1')
             ->setParameter(1, $params['userId'])
             ->orderBy('a.date', 'DESC');
@@ -51,14 +47,11 @@ class ActivitiesLogRepository extends ServiceEntityRepository
         return $this->queryBuilder;
     }
 
-    /**
-     * @param array $params
-     * @return \Doctrine\ORM\QueryBuilder
-     */
     public function queryUserInteractiveLogin(array $params): QueryBuilder
     {
-        $this->queryBuilder = $this->createQueryBuilder('a')
+        $this->queryBuilder = $this->doctrineHelper->getCurrentEntityManager()->createQueryBuilder('a')
             ->select('a')
+            ->from('EzPlatform\ActivitiesLogBundle\Entity\ActivitiesLog', 'a')
             ->andWhere('a.userId = ?1')
             ->andWhere('a.eventName = ?2')
             ->setParameter(1, $params['userId'])
@@ -68,11 +61,6 @@ class ActivitiesLogRepository extends ServiceEntityRepository
         return $this->queryBuilder;
     }
 
-    /**
-     * @param $method
-     * @param array|null $params
-     * @return mixed
-     */
     public function getQueryBuilder($method, array $params = null)
     {
         return $this->{$method}($params);

@@ -2,8 +2,8 @@
 
 namespace EzPlatform\ActivitiesLog\EventListener;
 
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent;
+use eZ\Publish\API\Repository\PermissionResolver;
+use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 
@@ -17,13 +17,10 @@ class ConfigureMenuListener implements TranslationContainerInterface
 
     /** @var string */
     private const ACTIVITIES_LOG_MENU_MY = 'activities__log__menu__my';
-
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
-    private $permissionResolver;
+    private PermissionResolver $permissionResolver;
 
     /**
      * ConfigureMenuListener constructor.
-     * @param \Ibexa\Contracts\Core\Repository\PermissionResolver $permissionResolver
      */
     public function __construct(
         PermissionResolver $permissionResolver
@@ -32,27 +29,17 @@ class ConfigureMenuListener implements TranslationContainerInterface
     }
 
     /**
-     * @param \Ibexa\AdminUi\Menu\Event\ConfigureMenuEvent $event
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
      */
-    public function onMenuConfigure(ConfigureMenuEvent $event)
+    public function onMenuConfigure(ConfigureMenuEvent $event): void
     {
         $root = $event->getMenu();
         if ($this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_manage')) {
             $root->addChild(
                 self::ACTIVITIES_LOG_MENU_ITEM,
                 [
-                    'extras' => [
-                        'translation_domain' => 'menu',
-                        'icon' => 'stats',
-                        'orderNumber' => 135,
-                    ],
-                    'attributes' => [
-                        'data-tooltip-placement' => 'right',
-                        'data-tooltip-extra-class' => 'ibexa-tooltip--info-neon',
-                    ],
-                ],
-
+                    'extras' => ['translation_domain' => 'menu'],
+                ]
             );
         }
         if ($this->permissionResolver->hasAccess('ezplatformactivitieslog', 'activitieslog_all')) {
@@ -60,7 +47,7 @@ class ConfigureMenuListener implements TranslationContainerInterface
                 self::ACTIVITIES_LOG_MENU_ALL,
                 [
                     'route' => 'admin_log_activities_all',
-                    'extras' => ['translation_domain' => 'menu','orderNumber' => 10],
+                    'extras' => ['translation_domain' => 'menu'],
                 ]
             );
         }
@@ -70,14 +57,13 @@ class ConfigureMenuListener implements TranslationContainerInterface
                 self::ACTIVITIES_LOG_MENU_MY,
                 [
                     'route' => 'admin_log_activities_my',
-                    'extras' => ['translation_domain' => 'menu','orderNumber' => 20],
+                    'extras' => ['translation_domain' => 'menu'],
                 ]
             );
         }
     }
 
-    /** @return array  */
-    public static function getTranslationMessages()
+    public static function getTranslationMessages(): array
     {
         return [
             (new Message(self::ACTIVITIES_LOG_MENU_ITEM, 'menu'))->setDesc('Activities Log'),

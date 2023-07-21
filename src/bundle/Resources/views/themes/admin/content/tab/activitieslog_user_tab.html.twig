@@ -2,7 +2,7 @@
 {% import _self as tab %}
 
 {% if pagination.currentPageResults is not empty %}
-    {{  include('@ibexadesign/activities/activitieslog_table.html.twig', {
+    {{  include('@ezdesign/activities/activitieslog_table.html.twig', {
         'pagination': pagination,
     }) }}
 {% else %}
@@ -12,7 +12,7 @@
 {% endif %}
 
 {% if pagination.haveToPaginate %}
-    {{  include('@ibexadesign/ui/pagination.html.twig', {
+    {{  include('@ezdesign/ui/pagination.html.twig', {
         'pager': pagination,
         'paginaton_params': {
             'routeName': activities_pagination_params.route_name,

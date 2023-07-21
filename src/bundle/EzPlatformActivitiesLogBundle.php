@@ -8,13 +8,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EzPlatformActivitiesLogBundle extends Bundle
 {
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     public function build(ContainerBuilder $container)
     {
-        /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $kernelExtension */
-        $kernelExtension = $container->getExtension('ibexa');
+        /** @var \eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension $kernelExtension */
+        $kernelExtension = $container->getExtension('ezpublish');
         $kernelExtension->addPolicyProvider(new UIEzPlatformActivitiesLogPolicyProvider($this->getPath()));
     }
 }

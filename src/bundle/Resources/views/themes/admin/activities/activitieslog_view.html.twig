@@ -1,4 +1,4 @@
-{% extends "@ibexadesign/ui/layout.html.twig" %}
+{% extends "@ezdesign/ui/layout.html.twig" %}
 
 {% trans_default_domain 'activities' %}
 
@@ -16,11 +16,11 @@
 
                     <div class="display-results">
 
-                        {% include '@ibexadesign/activities/activitieslog_table.html.twig' %}
+                        {% include '@ezdesign/activities/activitieslog_table.html.twig' %}
 
                     </div>
                     {% if pagination.haveToPaginate %}
-                        {{  include('@ibexadesign/ui/pagination.html.twig', {
+                        {{  include('@ezdesign/ui/pagination.html.twig', {
                             'pager': pagination,
                             'paginaton_params': {
                                 'pageParameter': '[page]'

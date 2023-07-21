@@ -2,47 +2,60 @@
 
 namespace EzPlatform\ActivitiesLogBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use EzPlatform\ActivitiesLogBundle\Repository\ActivitiesLogRepository;
+
 /**
- * ActivitiesLog.
+ * @ORM\Entity(repositoryClass=ActivitiesLogRepository::class)
  */
 class ActivitiesLog
 {
     /**
-     * @var int
+     * @ORM\Id
+     *
+     * @ORM\GeneratedValue
+     *
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="contentobject_id", type="integer", nullable=true)
      */
     private $contentObjectId;
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="user_id", type="integer")
      */
     private $userId;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="event_name", type="string", length=255)
      */
     private $eventName;
 
     /**
-     * @var string
+     * @ORM\Column(type="text")
      */
     private $data;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
     /**
      * Get id.
-     *
-     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -51,10 +64,8 @@ class ActivitiesLog
      * Set contentObjectId.
      *
      * @param int $contentObjectId
-     *
-     * @return ActivitiesLog
      */
-    public function setContentobjectId($contentObjectId)
+    public function setContentobjectId($contentObjectId): self
     {
         $this->contentObjectId = $contentObjectId;
 
@@ -66,7 +77,7 @@ class ActivitiesLog
      *
      * @return int
      */
-    public function getContentobjectId()
+    public function getContentobjectId(): ?int
     {
         return $this->contentObjectId;
     }
@@ -75,10 +86,8 @@ class ActivitiesLog
      * Set userId.
      *
      * @param int $userId
-     *
-     * @return ActivitiesLog
      */
-    public function setUserId($userId)
+    public function setUserId($userId): self
     {
         $this->userId = $userId;
 
@@ -87,10 +96,8 @@ class ActivitiesLog
 
     /**
      * Get userId.
-     *
-     * @return int
      */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
@@ -99,10 +106,8 @@ class ActivitiesLog
      * Set eventName.
      *
      * @param string $eventName
-     *
-     * @return ActivitiesLog
      */
-    public function setEventName($eventName)
+    public function setEventName($eventName): self
     {
         $this->eventName = $eventName;
 
@@ -114,7 +119,7 @@ class ActivitiesLog
      *
      * @return string
      */
-    public function getEventName()
+    public function getEventName(): ?string
     {
         return $this->eventName;
     }
@@ -123,10 +128,8 @@ class ActivitiesLog
      * Set data.
      *
      * @param string $data
-     *
-     * @return ActivitiesLog
      */
-    public function setData($data)
+    public function setData($data): self
     {
         $this->data = $data;
 
@@ -138,7 +141,7 @@ class ActivitiesLog
      *
      * @return string
      */
-    public function getData()
+    public function getData(): ?string
     {
         return $this->data;
     }
